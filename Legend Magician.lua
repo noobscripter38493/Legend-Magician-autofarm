@@ -105,10 +105,13 @@ for i, v in next, workspace:GetChildren() do
                     xpcall(function()
                         local remote = chinese_remotes[1]
                         while mob_humanoid.Health > 0 do
-                            remote = chinese_remotes[1]
-                            if not remote.Parent then task.wait(.1) continue end
+                            for i = 1, 10 do
+                                remote = chinese_remotes[1]
+                                if not remote.Parent then task.wait(.1) continue end
+                                
+                                remote:FireServer({v2}, mob_hrp.Position)
+                            end
                             
-                            remote:FireServer({v2}, mob_hrp.Position)
                             task.wait(.1)
                         end
                     end, function(err)
