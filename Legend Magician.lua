@@ -108,7 +108,7 @@ for i, v in next, workspace:GetChildren() do
                             remote = chinese_remotes[1]
                             if not remote.Parent then task.wait(.1) continue end
                             
-                            remote:FireServer({v2}, mob_hrp.Position * Vector3.new(0, 20, 0))
+                            remote:FireServer({v2}, mob_hrp.Position)
                             task.wait(.1)
                         end
                     end, function(err)
