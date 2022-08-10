@@ -1,3 +1,4 @@
+task.wait(9e9) -- patched
 local plr = game.Players.LocalPlayer
 local char = plr.Character or plr.CharacterAdded:Wait()
 local hrp = char:WaitForChild("HumanoidRootPart")
@@ -25,15 +26,13 @@ local function WaitForChildWhichIsA(parent, child_classname)
 end
 
 local function teleport_and_collect(part, prompt)
-    xpcall(function()
+    pcall(function()
         hrp.CFrame = part.CFrame
     
         task.wait(.1)
         
         fireproximityprompt(prompt)
         task.wait(.1)
-    end, function(err)
-        warn("[Auto Pickup Error]", err)
     end)
 end
 
@@ -102,7 +101,7 @@ for i, v in next, workspace:GetChildren() do
                 local mob_hrp = v2:FindFirstChild("HumanoidRootPart")
                 local mob_humanoid = v2:FindFirstChild("Humanoid")
                 if mob_hrp and mob_humanoid then
-                    xpcall(function()
+                    pcall(function()
                         local remote = chinese_remotes[1]
                         while mob_humanoid.Health > 0 do
                             for i = 1, 10 do
@@ -114,8 +113,6 @@ for i, v in next, workspace:GetChildren() do
                             
                             task.wait(.1)
                         end
-                    end, function(err)
-                        warn("[Auto Farm Error]", err)
                     end)
                 end
             end
